@@ -24,7 +24,7 @@ pipeline {
         container(name: 'kaniko', shell: '/busybox/sh') {
           withEnv(['PATH+EXTRA=/busybox:/kaniko']) {
             sh """#!/busybox/sh
-            /kaniko/executor --context `pwd` --cache --cache-repo ${env.DOCKER_REGISTRY}/lolatravel/layer-cache --destination ${env.DOCKER_REGISTRY}/lolatravel/${APP}:${env.GIT_COMMIT.take(7)}"""
+            /kaniko/executor --context `pwd` --cache --dockerfile Dockerfile-celery4 --cache-repo ${env.DOCKER_REGISTRY}/lolatravel/layer-cache --destination ${env.DOCKER_REGISTRY}/lolatravel/${APP}:${env.GIT_COMMIT.take(7)}"""
           }
         }
       }
